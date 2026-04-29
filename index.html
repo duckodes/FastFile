@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FastFile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/res/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>檔案上傳分享</h2>
+        <input type="file" id="fileInput" multiple>
+        <select id="expiry">
+            <option value="30">保留 30 分鐘</option>
+            <option value="60">保留 1 小時</option>
+        </select>
+        <button class="upload-file">上傳檔案</button>
+        <div id="shortUrl"></div>
+        <div class="file-list" id="fileList"></div>
+    </div>
+
+    <script type="module" src="/res/modules/main.js"></script>
+</body>
+
+</html>
