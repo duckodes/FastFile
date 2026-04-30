@@ -3,15 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>FastFile</title>
+    <title>USB Online</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/res/css/style.css">
 </head>
 
 <body>
     <div class="container">
-        <h2>檔案上傳分享</h2>
-        <input type="file" id="fileInput" multiple>
+        <h2>USB Drive (D:)</h2>
+        <div class="upload-area" id="uploadArea">
+            <p id="uploadText">拖曳檔案到這裡，或點擊選擇檔案</p>
+            <input type="file" id="fileInput" multiple hidden>
+        </div>
         <select id="expiry">
             <option value="30">保留 30 分鐘</option>
             <option value="60">保留 1 小時</option>
@@ -19,8 +22,11 @@
         <button class="upload-file">上傳檔案</button>
         <div id="shortUrl"></div>
         <div class="file-list" id="fileList"></div>
+        <button id="deleteAll">刪除全部檔案</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <script type="module" src="/res/modules/main.js"></script>
 </body>
 

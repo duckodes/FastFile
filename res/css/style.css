@@ -1,40 +1,134 @@
 body {
-    font-family: Arial;
-    margin: 40px;
-    background: #f9f9f9;
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 20px;
+    background: #1e1e1e; /* 深色背景 */
+    color: #e0e0e0;      /* 淺灰文字 */
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    background: #2b2b2b; /* 深灰容器 */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #444;
 }
 
 h2 {
-    text-align: center;
+    text-align: left;
+    font-size: 14px;
+    margin: 6px 0;
+    color: #e0e0e0;
 }
 
+/* 控制輸入元件 */
 input,
 select,
 button {
-    margin: 10px 0;
-    padding: 8px;
+    margin: 6px 0;
+    padding: 6px;
     width: 100%;
+    font-size: 13px;
+    background: #3a3a3a;
+    border: 1px solid #555;
+    color: #e0e0e0;
 }
 
+input:focus,
+select:focus,
+button:hover {
+    border-color: #3399ff;
+    outline: none;
+}
+
+/* 檔案總管清單 */
 .file-list {
-    margin-top: 20px;
+    margin-top: 10px;
+    border: 1px solid #444;
+    background: #1e1e1e;
+    font-size: 13px;
 }
 
+/* 每列檔案 */
 .file-item {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: 60% 40%; /* 左邊檔名 / 右邊操作 */
+    align-items: center;
+    padding: 6px 10px;
+    border-bottom: 1px solid #333;
+    cursor: default;
+    color: #e0e0e0;
+}
+
+/* 檔名樣式 */
+.file-item a {
+    color: #e0e0e0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* 檔案圖示 */
+.file-item a::before {
+    content: "📄";
+    margin-right: 6px;
+}
+
+/* 操作按鈕靠右 */
+.file-item button {
+    justify-self: end;
+    padding: 2px 6px;
+    font-size: 12px;
+    background: #3a3a3a;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+.file-item button:hover {
+    background: #444;
+    border-color: #3399ff;
+}
+
+/* hover 效果 */
+.file-item:hover {
+    background: #2a2a2a; /* 深灰 hover */
+}
+
+/* 選取效果 */
+.file-item.selected {
+    background: #094771; /* Windows 深色模式選取藍 */
+    color: #fff;
 }
 
 .short-url {
-    color: blue;
+    color: #3399ff;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.upload-area {
+    border: 2px dashed #555;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    background: #2b2b2b;
+    color: #aaa;
+}
+
+.upload-area.dragover {
+    background: #094771;
+    border-color: #3399ff;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(51,153,255,0.6); }
+    70% { box-shadow: 0 0 8px 12px rgba(51,153,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(51,153,255,0); }
+}
+
+#deleteAll {
+    display: none;
 }
