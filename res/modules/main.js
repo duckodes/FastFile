@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getDatabase, ref, set, get, child, remove } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, updateMetadata, deleteObject, listAll } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-storage.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, updateMetadata, deleteObject } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-storage.js";
 import fetcher from "./fetcher.js";
 
 const firebaseConfig = await fetcher.load('../res/config/firebaseConfig.json');
@@ -30,9 +30,14 @@ if (f) {
         downloadAll.style.display = "none";
         try {
             const folderRef = storageRef(storage, saveHead + f);
-            const listResult = await listAll(folderRef);
-            for (let itemRef of listResult.items) {
-                await deleteObject(itemRef);
+
+            const snapshot = await get(child(ref(db), saveHead + f));
+            const data = snapshot.val();
+            const files = data.files || [];
+            for (let file of files) {
+                const filePath = `${saveHead}${f}/${file.name}`;
+                const fileRef = storageRef(storage, filePath);
+                await deleteObject(fileRef);
             }
             await remove(ref(db, saveHead + f));
 
@@ -114,9 +119,11 @@ async function loadFiles(f) {
 
     if (Date.now() > data.expiry) {
         const folderRef = storageRef(storage, saveHead + f);
-        const listResult = await listAll(folderRef);
-        for (let itemRef of listResult.items) {
-            await deleteObject(itemRef);
+        const files = data.files || [];
+        for (let file of files) {
+            const filePath = `${saveHead}${f}/${file.name}`;
+            const fileRef = storageRef(storage, filePath);
+            await deleteObject(fileRef);
         }
         await remove(ref(db, saveHead + f));
         document.getElementById('fileList').innerHTML = "檔案已過期";
