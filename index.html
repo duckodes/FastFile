@@ -22,7 +22,10 @@
         </select>
         <button class="upload-file">上傳檔案</button>
         <div id="shortUrl"></div>
-        <div class="file-list" id="fileList"></div>
+        <div id="file-list-qrcode">
+            <div class="file-list" id="fileList"></div>
+            <div id="qrcode"></div>
+        </div>
         <button id="deleteAll">刪除全部檔案</button>
     </div>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6142856924229624"
@@ -34,6 +37,7 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
+    <script src="/res/modules/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <script type="module" src="/res/modules/main.js"></script>

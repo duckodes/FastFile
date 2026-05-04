@@ -53,6 +53,14 @@ if (f) {
             downloadAll.style.display = "";
         }
     });
+
+    new QRCode(document.getElementById('qrcode'), {
+        text: location.href,
+        width: 128,
+        height: 128,
+        colorDark: '#66666699',
+        colorLight: 'transparent',
+    });
 }
 uploadFile.addEventListener('click', uploadFiles);
 
@@ -106,6 +114,7 @@ async function uploadFiles() {
 
     shortUrlContainer.appendChild(shortUrlEl);
     uploadFile.style.display = "";
+    shortUrlEl.click();
 }
 
 

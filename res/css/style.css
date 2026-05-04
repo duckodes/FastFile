@@ -1,14 +1,14 @@
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 20px;
-    background: #1e1e1e; /* 深色背景 */
-    color: #e0e0e0;      /* 淺灰文字 */
+    background: #1e1e1e;
+    color: #e0e0e0;
 }
 
 .container {
     max-width: 800px;
     margin: auto;
-    background: #2b2b2b; /* 深灰容器 */
+    background: #2b2b2b;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #444;
@@ -21,7 +21,6 @@ h2 {
     color: #e0e0e0;
 }
 
-/* 控制輸入元件 */
 input,
 select,
 button {
@@ -41,18 +40,16 @@ button:hover {
     outline: none;
 }
 
-/* 檔案總管清單 */
 .file-list {
-    margin-top: 10px;
+    width: 100%;
     border: 1px solid #444;
     background: #1e1e1e;
     font-size: 13px;
 }
 
-/* 每列檔案 */
 .file-item {
     display: grid;
-    grid-template-columns: 60% 40%; /* 左邊檔名 / 右邊操作 */
+    grid-template-columns: 60% 40%;
     align-items: center;
     padding: 6px 10px;
     border-bottom: 1px solid #333;
@@ -60,7 +57,6 @@ button:hover {
     color: #e0e0e0;
 }
 
-/* 檔名樣式 */
 .file-item a {
     color: #e0e0e0;
     text-decoration: none;
@@ -68,13 +64,11 @@ button:hover {
     align-items: center;
 }
 
-/* 檔案圖示 */
 .file-item a::before {
     content: "📄";
     margin-right: 6px;
 }
 
-/* 操作按鈕靠右 */
 .file-item button {
     justify-self: end;
     padding: 2px 6px;
@@ -89,14 +83,12 @@ button:hover {
     border-color: #3399ff;
 }
 
-/* hover 效果 */
 .file-item:hover {
-    background: #2a2a2a; /* 深灰 hover */
+    background: #2a2a2a;
 }
 
-/* 選取效果 */
 .file-item.selected {
-    background: #094771; /* Windows 深色模式選取藍 */
+    background: #094771;
     color: #fff;
 }
 
@@ -124,11 +116,30 @@ button:hover {
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(51,153,255,0.6); }
-    70% { box-shadow: 0 0 8px 12px rgba(51,153,255,0); }
-    100% { box-shadow: 0 0 0 0 rgba(51,153,255,0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba(51, 153, 255, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 8px 12px rgba(51, 153, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(51, 153, 255, 0);
+    }
 }
 
 #deleteAll {
     display: none;
+}
+
+#qrcode {
+    display: flex;
+    justify-content: end;
+}
+
+#file-list-qrcode {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
