@@ -138,6 +138,28 @@ async function loadFiles(f) {
         document.getElementById('fileList').innerHTML = "檔案已過期";
         return;
     }
+    const now = Date.now();
+    const remaining = data.expiry - now;
+    const minutes = Math.floor(remaining / 1000 / 60);
+    const timeLeft = document.getElementById("time-left");
+    if (minutes < 5) {
+        const timer = setInterval(() => {
+            const now = Date.now();
+            const remaining = data.expiry - now;
+
+            if (remaining <= 0) {
+                clearInterval(timer);
+                console.log("已經過期");
+                return;
+            }
+
+            const minutes = Math.floor(remaining / 1000 / 60);
+            const seconds = Math.floor((remaining / 1000) % 60);
+            timeLeft.innerText = `⏱︎ ${minutes}分${seconds}秒`;
+        }, 1000);
+    } else {
+        timeLeft.textContent = `⏱︎ ${new Date(data.expiry).toLocaleString()}`;
+    }
 
     let html = "<h3>檔案清單</h3>";
     data.files.forEach(f => {

@@ -138,6 +138,16 @@ button:hover {
     justify-content: end;
 }
 
+#qrcode img {
+    width: 100%;
+    height: auto;
+}
+
+#time-left {
+    word-break: break-all;
+    text-align: end;
+}
+
 #file-list-qrcode {
     display: flex;
     justify-content: space-between;
