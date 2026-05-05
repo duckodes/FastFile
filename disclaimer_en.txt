@@ -1,0 +1,28 @@
+========================================
+Disclaimer
+========================================
+1. Nature of Service
+   - This website only provides file upload and sharing functionality and is not responsible for the content of uploaded files.
+   - The services are provided "as is" without any express or implied warranties.
+
+2. User Responsibility
+   - Users are solely responsible for any legal issues arising from file content or from disclosure of file parameters or QRCode.
+   - Users must not use this website for any illegal or infringing activities.
+
+3. Limitation of Liability
+   - The website shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use of its services.
+   - The website does not guarantee uninterrupted, error-free, or fully secure operation of the service.
+   - The website is not responsible for third-party actions, including unauthorized access, hacking, or misuse of uploaded files.
+   - Users assume all risks associated with QRCode or file parameters being obtained or misused by third parties.
+
+4. Third-Party Links
+   - This website may contain links to third-party websites, but it is not responsible for the content or security of such websites.
+   - Users assume all risks associated with accessing and using third-party websites.
+
+5. Modifications and Updates
+   - This disclaimer may be updated at any time and will take effect immediately upon publication.
+   - Users are responsible for reviewing this disclaimer periodically to stay informed of the latest version.
+
+6. Governing Law
+   - This disclaimer is governed by the laws of Taiwan (R.O.C.).
+   - Any disputes shall be subject to the jurisdiction of the New Taipei District Court.

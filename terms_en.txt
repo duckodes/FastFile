@@ -1,0 +1,32 @@
+========================================
+Terms of Service
+========================================
+These Terms of Service constitute a binding legal agreement between you and this website. By using this website, you agree to the following:
+
+1. User Conduct
+   - Users must not upload any illegal, infringing, malicious, or inappropriate content, including but not limited to:
+     * Files that infringe copyrights, trademarks, patents, or other intellectual property rights
+     * Files containing malware, viruses, or harmful code
+     * Content involving defamation, hate speech, harassment, or violations of public order
+   - Users are solely responsible for ensuring the legality of uploaded files.
+
+2. Service Rights
+   - The website reserves the right to remove inappropriate files, restrict access, and terminate services at any time.
+   - The website may temporarily suspend services for maintenance, upgrades, or security reasons.
+   - The website reserves the right to modify or discontinue services without prior notice.
+
+3. Intellectual Property
+   - Users retain ownership of their files but grant the website a non-exclusive, royalty-free license to process files for service provision.
+   - The website does not claim ownership of user content but may use anonymized metadata for analytics and service improvement.
+
+4. Limitation of Liability
+   - The website does not guarantee file security, integrity, or permanent storage.
+   - The website is not liable for file loss, damage, unauthorized access, or service interruptions.
+   - Users assume all risks associated with using the service.
+
+5. Indemnification
+   - Users agree to indemnify and hold harmless the website, its affiliates, and employees from any claims, damages, or liabilities arising from uploaded content or misuse of the service.
+
+6. Governing Law
+   - These Terms are governed by the laws of Taiwan (R.O.C.).
+   - Any disputes shall be subject to the jurisdiction of the New Taipei District Court.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -11,19 +11,20 @@
 
 <body>
     <div class="container">
-        <h2>USB Drive (D:)</h2>
+        <h2>🖴 USB Drive (D:)</h2>
         <div class="upload-area" id="uploadArea">
-            <p id="uploadText">拖曳檔案到這裡，或點擊選擇檔案</p>
+            <p id="uploadText">Drag and drop files here, or click to select.</p>
             <input type="file" id="fileInput" multiple hidden>
         </div>
+        <div>Keep for :</div>
         <select id="expiry">
-            <option value="1">保留 1 分鐘</option>
-            <option value="30">保留 30 分鐘</option>
-            <option value="60">保留 1 小時</option>
-            <option value="1440">保留 24 小時</option>
+            <option value="1">1 minute</option>
+            <option value="30">30 minute</option>
+            <option value="60">1 hour</option>
+            <option value="360">6 hour</option>
+            <option value="2880">1 day</option>
         </select>
-        <button class="upload-file">上傳檔案</button>
-        <div id="shortUrl"></div>
+        <button class="upload-file">Upload Files</button>
         <div id="file-list-qrcode">
             <div class="file-list" id="fileList"></div>
             <div id="file-right-side">
@@ -31,16 +32,30 @@
                 <div id="time-left"></div>
             </div>
         </div>
-        <button id="deleteAll">刪除全部檔案</button>
+        <button id="deleteAll">Delete All</button>
     </div>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6142856924229624"
         crossorigin="anonymous"></script>
-    <!-- 多媒體廣告 -->
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6142856924229624" data-ad-slot="9716059751"
         data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+    <footer>
+        By using this website, you agree to the platform's
+        <a class="terms" href="/terms_en.txt">Terms of Service</a> |
+        <a class="terms" href="/privacy_en.txt">Privacy Policy</a> |
+        <a class="terms" href="/disclaimer_en.txt">Disclaimer</a>
+        .
+        <br>
+        使用本網站即表示您同意本平台的
+        <a class="terms" href="/terms_zh.txt">《服務條款》</a> |
+        <a class="terms" href="/privacy_zh.txt">《隱私政策》</a> |
+        <a class="terms" href="/disclaimer_zh.txt">《免責聲明》</a>
+        。
+        <br>
+        <p>© 2026 Duckode Tech. | UGSoft Co., Ltd. All rights reserved.</p>
+    </footer>
 
     <script src="/res/modules/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>

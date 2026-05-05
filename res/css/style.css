@@ -3,6 +3,8 @@ body {
     margin: 20px;
     background: #1e1e1e;
     color: #e0e0e0;
+    user-select: none;
+    -moz-user-select: none;
 }
 
 .container {
@@ -152,4 +154,15 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+.terms {
+    color: #52baff;
+}
+
+footer {
+    position: sticky;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 50px;
 }

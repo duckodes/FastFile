@@ -10,64 +10,18 @@ const storage = getStorage(app);
 
 const saveHead = "usb/";
 const uploadFile = document.querySelector('.upload-file');
+const deleteAll = document.getElementById("deleteAll");
 const params = new URLSearchParams(window.location.search);
 const f = params.get("f");
 if (f) {
     loadFiles(f);
-
-    const deleteAll = document.getElementById("deleteAll");
-    deleteAll.style.display = "block";
-    deleteAll.addEventListener("click", async () => {
-        if (!f) {
-            return;
-        }
-
-        if (!confirm("確定要刪除這個分享下的所有檔案嗎？")) return;
-
-        deleteAll.style.display = "";
-        uploadFile.style.display = "none";
-        const downloadAll = document.getElementById('downloadAll');
-        downloadAll.style.display = "none";
-        try {
-            const folderRef = storageRef(storage, saveHead + f);
-
-            const snapshot = await get(child(ref(db), saveHead + f));
-            const data = snapshot.val();
-            const files = data.files || [];
-            for (let file of files) {
-                const filePath = `${saveHead}${f}/${file.name}`;
-                const fileRef = storageRef(storage, filePath);
-                await deleteObject(fileRef);
-            }
-            await remove(ref(db, saveHead + f));
-
-            document.getElementById("fileList").innerHTML = "所有檔案已刪除";
-            downloadAll.remove();
-            uploadFile.style.display = "";
-            deleteAll.style.display = "";
-        } catch (err) {
-            console.error("刪除失敗:", err);
-            alert("刪除失敗，請稍後再試");
-            deleteAll.style.display = "block";
-            uploadFile.style.display = "";
-            downloadAll.style.display = "";
-        }
-    });
-
-    new QRCode(document.getElementById('qrcode'), {
-        text: location.href,
-        width: 128,
-        height: 128,
-        colorDark: '#66666699',
-        colorLight: 'transparent',
-    });
 }
 uploadFile.addEventListener('click', uploadFiles);
 
 async function uploadFiles() {
     const files = document.getElementById('fileInput').files;
     if (!files || files.length === 0) {
-        alert('尚未選擇檔案');
+        alert('No file selected.');
         return;
     }
     uploadFile.style.display = "none";
@@ -106,24 +60,25 @@ async function uploadFiles() {
     let delaySeconds = expiryMinutes * 60;
     await scheduleClean(delaySeconds);
 
-    const shortUrlContainer = document.getElementById("shortUrl");
-    shortUrlContainer.innerHTML = "短網址: ";
-
-    const shortUrlEl = document.createElement("a");
-    shortUrlEl.className = "short-url";
-    shortUrlEl.href = `${location.origin}?f=${shortCode}`;
-    shortUrlEl.textContent = shortUrlEl.href;
-
-    shortUrlContainer.appendChild(shortUrlEl);
     uploadFile.style.display = "";
-    shortUrlEl.click();
+
+    loadFiles(shortCode);
+    const params = new URLSearchParams(window.location.search);
+    params.set("f", shortCode);
+    window.history.pushState({}, "", `${window.location.pathname}?${params.toString()}`);
+    document.getElementById('fileInput').value = "";
+    document
+        .getElementById('fileInput')
+        .dispatchEvent(new Event('change', { bubbles: true }));
 }
 
 
 async function loadFiles(f) {
+    document.getElementById("time-left").innerText = "";
+    document.getElementById('qrcode').innerHTML = "";
     const snapshot = await get(child(ref(db), saveHead + f));
     if (!snapshot.exists()) {
-        document.getElementById('fileList').innerHTML = "此連結已過期或不存在";
+        document.getElementById('fileList').innerHTML = "This folder is empty.";
         return;
     }
     const data = snapshot.val();
@@ -137,9 +92,59 @@ async function loadFiles(f) {
             await deleteObject(fileRef);
         }
         await remove(ref(db, saveHead + f));
-        document.getElementById('fileList').innerHTML = "檔案已過期";
+        document.getElementById('fileList').innerHTML = "This folder is empty.";
         return;
     }
+
+    deleteAll.style.display = "block";
+    deleteAll.addEventListener("click", async () => {
+        if (!f) {
+            return;
+        }
+
+        if (!confirm("Are you sure you want to delete all files?")) return;
+
+        deleteAll.style.display = "";
+        uploadFile.style.display = "none";
+        const downloadAll = document.getElementById('downloadAll');
+        downloadAll.style.display = "none";
+        try {
+            const folderRef = storageRef(storage, saveHead + f);
+
+            const snapshot = await get(child(ref(db), saveHead + f));
+            const data = snapshot.val();
+            const files = data.files || [];
+            for (let file of files) {
+                const filePath = `${saveHead}${f}/${file.name}`;
+                const fileRef = storageRef(storage, filePath);
+                await deleteObject(fileRef);
+            }
+            await remove(ref(db, saveHead + f));
+
+            document.getElementById("fileList").innerHTML = "This folder is empty.";
+            downloadAll.remove();
+            uploadFile.style.display = "";
+            deleteAll.style.display = "";
+            if (timer) {
+                clearInterval(timer);
+            }
+            loadFiles(f);
+        } catch (err) {
+            console.error("failed:", err);
+            alert("Deletion failed, please try again later.");
+            deleteAll.style.display = "block";
+            uploadFile.style.display = "";
+            downloadAll.style.display = "";
+        }
+    });
+
+    new QRCode(document.getElementById('qrcode'), {
+        text: `${location.origin}?f=${f}`,
+        width: 128,
+        height: 128,
+        colorDark: '#66666699',
+        colorLight: 'transparent',
+    });
     const now = Date.now();
     const remaining = data.expiry - now;
     const minutes = Math.floor(remaining / 1000 / 60);
@@ -150,7 +155,6 @@ async function loadFiles(f) {
 
         if (remaining <= 0) {
             clearInterval(timer);
-            console.log("已經過期");
             loadFiles(f);
             return;
         }
@@ -159,20 +163,20 @@ async function loadFiles(f) {
         const minutes = Math.floor((remaining / 1000 / 60) % 60);
         const seconds = Math.floor((remaining / 1000) % 60);
 
-        timeLeft.innerText = `⏱︎ ${hours}時${minutes}分${seconds}秒`;
+        timeLeft.innerText = `${hours.toString().padStart(2, "0")} : ${minutes.toString().padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
     }, 1000);
 
-    let html = "<h3>檔案清單</h3>";
+    let html = "<h3>📁 Files</h3>";
     data.files.forEach(f => {
         html += `
           <div class="file-item">
-            <!-- 檔案檢視 -->
             <a href="${f.url}" target="_blank">${f.name}</a>
           </div>`;
     });
 
-    html += `<button id="downloadAll">全部下載</button>`;
+    html += `<button id="downloadAll">Download All</button>`;
     document.getElementById('fileList').innerHTML = html;
+    document.getElementById('fileList').appendChild(deleteAll);
 
     document.querySelectorAll('.download-single').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -218,9 +222,9 @@ const uploadText = document.getElementById("uploadText");
 function updateUploadText() {
     if (fileInput.files.length > 0) {
         const names = Array.from(fileInput.files).map(f => f.name).join(", ");
-        uploadText.textContent = "已選擇檔案: " + names;
+        uploadText.textContent = "Selected files: " + names;
     } else {
-        uploadText.textContent = "拖曳檔案到這裡，或點擊選擇檔案";
+        uploadText.textContent = "Drag and drop files here, or click to select.";
     }
 }
 

@@ -1,0 +1,28 @@
+========================================
+Privacy Policy
+========================================
+This Privacy Policy explains how this website collects, uses, and protects information:
+
+1. Data Collection
+   - No login is required; uploads are processed based on parameters provided.
+   - This website does not collect users' IP addresses.
+   - The website may collect basic technical information (such as browser type, file size, and upload time) for service maintenance.
+
+2. File Access and Retention
+   - The website operates under an open-access model: anyone who knows the file parameter (/?f=param) or obtains the QRCode can view, delete, or edit the file.
+   - Users are solely responsible for any risks arising from file parameters or QRCode being disclosed or discovered by third parties.
+   - Files are retained according to system settings and may be automatically deleted after a certain period.
+   - Permanent storage is not guaranteed.
+
+3. Data Usage
+   - Information collected is used only for service maintenance, security monitoring, and system improvement.
+   - Data will not be sold or shared with third parties, except as required by law or to comply with legal investigations.
+   - Users retain rights under Taiwan’s Personal Data Protection Act and GDPR to request access, correction, or deletion of personal data, but must note that file access is not protected by authentication mechanisms.
+
+4. Security Measures
+   - The website implements reasonable technical measures to maintain system operation, but due to the open-access model, it cannot guarantee that files will not be accessed or modified by third parties.
+   - The website is not liable for damages caused by file parameter or QRCode disclosure or third-party use.
+
+5. User Rights
+   - Users have the right to access, correct, delete, or restrict the processing of their personal data.
+   - Users may contact technical support to exercise these rights, but must understand that file access is public and cannot be restricted from others.
