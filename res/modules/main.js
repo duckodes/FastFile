@@ -103,6 +103,8 @@ async function uploadFiles() {
         files: mergedFiles,
         expiry: expiryTime
     });
+    let delaySeconds = expiryMinutes * 60;
+    await scheduleClean(delaySeconds);
 
     const shortUrlContainer = document.getElementById("shortUrl");
     shortUrlContainer.innerHTML = "短網址: ";
@@ -142,24 +144,23 @@ async function loadFiles(f) {
     const remaining = data.expiry - now;
     const minutes = Math.floor(remaining / 1000 / 60);
     const timeLeft = document.getElementById("time-left");
-    if (minutes < 5) {
-        const timer = setInterval(() => {
-            const now = Date.now();
-            const remaining = data.expiry - now;
+    const timer = setInterval(() => {
+        const now = Date.now();
+        const remaining = data.expiry - now;
 
-            if (remaining <= 0) {
-                clearInterval(timer);
-                console.log("已經過期");
-                return;
-            }
+        if (remaining <= 0) {
+            clearInterval(timer);
+            console.log("已經過期");
+            loadFiles(f);
+            return;
+        }
 
-            const minutes = Math.floor(remaining / 1000 / 60);
-            const seconds = Math.floor((remaining / 1000) % 60);
-            timeLeft.innerText = `⏱︎ ${minutes}分${seconds}秒`;
-        }, 1000);
-    } else {
-        timeLeft.textContent = `⏱︎ ${new Date(data.expiry).toLocaleString()}`;
-    }
+        const hours = Math.floor(remaining / 1000 / 60 / 60);
+        const minutes = Math.floor((remaining / 1000 / 60) % 60);
+        const seconds = Math.floor((remaining / 1000) % 60);
+
+        timeLeft.innerText = `⏱︎ ${hours}時${minutes}分${seconds}秒`;
+    }, 1000);
 
     let html = "<h3>檔案清單</h3>";
     data.files.forEach(f => {
@@ -198,6 +199,16 @@ async function loadFiles(f) {
         saveAs(content, "files.zip");
     });
 
+}
+
+async function scheduleClean(sec) {
+    const response = await fetch("https://schedulecleanexpiredfastfiles-uqj7m73rbq-uc.a.run.app", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ delaySeconds: sec })
+    });
+    const result = await response.json();
+    console.log(result);
 }
 
 const uploadArea = document.getElementById("uploadArea");
